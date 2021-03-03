@@ -23,6 +23,7 @@ let stacks = {
 };
 
 // Start here. What is this function doing?
+// this is setting up the board
 const printStacks = () => {
   console.log("a: " + stacks.a);
   console.log("b: " + stacks.b);
@@ -30,27 +31,55 @@ const printStacks = () => {
 }
 
 // Next, what do you think this function should do?
-const movePiece = () => {
-  // Your code here
+//this function should move each token from each peg
+//it needs to be able to move more than one token stacked on one another
+const movePiece = (startStack, endStack) => {
+ 
+ let piece = stacks[startStack].unshift(stacks[endStack].shift(piece))
+
+  // the .unshift will will take the start stack and shift it to the beginning 
+  
 
 }
 
 // Before you move, should you check if the move it actually allowed? Should 3 be able to be stacked on 2
-const isLegal = () => {
+//this uses the contionals to see if there has been an illegal move made
+const isLegal = (startStack, endStack) => {
   // Your code here
-
+if(stacks[startStack].lenght > 0){
+  if(stacks[endStack].length == 0 || stacks[endStack].slice(-1) > stacks[startStack].slice(-1)){
+    return true
+  } else {
+    return false
+  }
+}
 }
 
 // What is a win in Towers of Hanoi? When should this function run?
-const checkForWin = () => {
+// this function calls on the test to see if there is a win
+//it will call on the array length to see if there are full stacks
+//if the conditions are met it will return true otherwise return false
+const checkForWin = (startStack, endStack) => {
   // Your code here
-
+if(stacks["c"].lenght == 4 || stacks["b"].length == 4){
+  return true
+} else {
+  return false
+}
 }
 
 // When is this function called? What should it do with its argument?
+// This tells the user when there has been a win
+//also tells user when a piece can't be moved
 const towersOfHanoi = (startStack, endStack) => {
   // Your code here
-
+if(isLegal(startStack,endStack)){
+  movePiece(startStack,endStack)
+} else {
+  return console.log("can't move there")
+} if (checkForWin()) {
+  return console.log("Winner!")
+}
 }
 
 const getPrompt = () => {
